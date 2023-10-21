@@ -3,19 +3,17 @@ import "./style.css";
 
 function CardFrontBack() {
     window.cardFrontBack = {};
-    window.cardFrontBack.openedCards = []; // Array para armazenar as cartas abertas
+    window.cardFrontBack.openedCards = [];
   
     window.cardFrontBack.handleClick = (event) => {
       const $origin = event.target;
       const $cardFrontBack = $origin.closest('.card-front-back');
   
       if ($cardFrontBack.classList.contains('-active')) {
-        return; // Retorna se a carta já estiver aberta
+        return; 
       }
-  
-      // Verifica se já existem duas cartas abertas
       if (window.cardFrontBack.openedCards.length === 2) {
-        // Desvira as duas cartas
+        
         window.cardFrontBack.openedCards.forEach((cardFrontBack) => {
           cardFrontBack.classList.remove('-active');
         });
@@ -25,17 +23,16 @@ function CardFrontBack() {
       $cardFrontBack.classList.add('-active');
       window.cardFrontBack.openedCards.push($cardFrontBack);
   
-      // Verifica se as duas cartas são diferentes
+      
       if (window.cardFrontBack.openedCards.length === 2) {
         const [card1, card2] = window.cardFrontBack.openedCards;
         if (card1.dataset.valor !== card2.dataset.valor) {
-          // Aguarda um breve intervalo e desvira as duas cartas
           setTimeout(() => {
             window.cardFrontBack.openedCards.forEach((card) => {
               card.classList.remove('-active');
             });
             window.cardFrontBack.openedCards = [];
-          }, 1000); // Tempo em milissegundos (1 segundo)
+          }, 1000);
         }
       }
     }
